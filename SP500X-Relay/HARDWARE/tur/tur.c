@@ -7,31 +7,18 @@ float s365F=1.0;
 u8 measureCount=0;
 u8 isMeasureFlg=0;
 
-// float getS365(u16 aveTimes)
-// {
-// 	float S365;
-// 	turnLed1();
-// 	delay_ms(10);
-// 	write_to_LTC2630ISC6(0X30,filter_settings.cs365);
-// 	S365=Get_Adc_Average(7,aveTimes);
-// 	filter_settings.s365=S365;
-// 	return S365;
-// }
-
 void measureTurb(void)
 {
 	float ntu,S365,darks365F,adcF;
 	
-	turnOffLeds();
+
 	delay_ms(15);
 	darks365F=Get_Adc_Average(7,10);
 	filter_settings.darks365=darks365F*10;
 	
-	write_to_LTC2630ISC6(0X30,filter_settings.cs365);
-	turnLed1();
+	write_to_LTC2630ISC6(0X30,filter_settings.cs365);;
 	delay_ms(15);
 	adcF=Get_Adc_Average(7,20);
-	turnOffLeds();
 	
 	if(adcF>darks365F)
 	{

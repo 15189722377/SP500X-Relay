@@ -50,17 +50,17 @@ void temperatureGpioInit()
 	g.GPIO_Mode=GPIO_Mode_Out_PP;
 	g.GPIO_Speed=GPIO_Speed_50MHz;
 	
-	g.GPIO_Pin=GPIO_Pin_5;//DCLK(SPI CLOCK_BB),pb5
+	g.GPIO_Pin=GPIO_Pin_9;//DCLK(SPI CLOCK_BB),pb5
 	GPIO_Init(GPIOB,&g);
-	g.GPIO_Pin=GPIO_Pin_0;//CS(ADC_CSB),pa0
-	GPIO_Init(GPIOA,&g);
-	g.GPIO_Pin=GPIO_Pin_15;//(SPI SLAVE_IN_BB),pc15
+	g.GPIO_Pin=GPIO_Pin_8;//CS(ADC_CSB),pa0
+	GPIO_Init(GPIOB,&g);
+	g.GPIO_Pin=GPIO_Pin_14;//(SPI SLAVE_IN_BB),pc15
 	GPIO_Init(GPIOC,&g);
 	
 	
 	g.GPIO_Mode=GPIO_Mode_IPU;
-	g.GPIO_Pin=GPIO_Pin_6;//DOUT(SPI SLAVE_OUT_BB) pb6
-	GPIO_Init(GPIOB,&g);
+	g.GPIO_Pin=GPIO_Pin_15;//DOUT(SPI SLAVE_OUT_BB) pb6
+	GPIO_Init(GPIOC,&g);
 	
 
 	
@@ -159,7 +159,7 @@ void ReadFromReg(unsigned char nByte) // nByte is the number of bytes which need
 		for(j=0; j<8; j++)
 		{
 			SCLOCK0;
-			if(GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_6)==0)
+			if(GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_15)==0)
 			{
 				temp=temp<<1;
 			}else
@@ -401,7 +401,7 @@ float temp_RTDA=0;
     //return gTempF;
 	if((TemperC<-10)||(TemperC>90))   //当温度超出限制，在运行状态寄存器中给出提示
 	{
-		system_status.runStatus=TMP_OVERRANGE;
+		//system_status.runStatus=TMP_OVERRANGE;
 		TemperC=25;
 	}
 	

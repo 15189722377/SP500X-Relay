@@ -7,17 +7,17 @@
 #include "sys.h"
 #include "delay.h"
 
-#define SCLOCK1   	GPIO_SetBits(GPIOB,GPIO_Pin_5);
-#define SCLOCK0   	GPIO_ResetBits(GPIOB,GPIO_Pin_5);
+#define SCLOCK1   	GPIO_SetBits(GPIOB,GPIO_Pin_9);
+#define SCLOCK0   	GPIO_ResetBits(GPIOB,GPIO_Pin_9);
 
-#define Temp_CS1  	GPIO_SetBits(GPIOA,GPIO_Pin_0);
-#define Temp_CS0  	GPIO_ResetBits(GPIOA,GPIO_Pin_0);
+#define Temp_CS1  	GPIO_SetBits(GPIOB,GPIO_Pin_8);
+#define Temp_CS0  	GPIO_ResetBits(GPIOB,GPIO_Pin_8);
 
-#define DIN1      	GPIO_SetBits(GPIOC,GPIO_Pin_15);
-#define DIN0      	GPIO_ResetBits(GPIOC,GPIO_Pin_15);
+#define DIN1      	GPIO_SetBits(GPIOC,GPIO_Pin_14);
+#define DIN0      	GPIO_ResetBits(GPIOC,GPIO_Pin_14);
 
-#define DOUT1     	GPIO_SetBits(GPIOB,GPIO_Pin_6);
-#define DOUT0     	GPIO_ResetBits(GPIOB,GPIO_Pin_6);
+#define DOUT1     	GPIO_SetBits(GPIOC,GPIO_Pin_15);
+#define DOUT0     	GPIO_ResetBits(GPIOC,GPIO_Pin_15);
 
 #define	R0			(100.0)
 #define	RTD_A		(3.908E-3)

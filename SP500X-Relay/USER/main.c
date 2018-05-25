@@ -10,6 +10,7 @@
 #include "SWITCH.H"
 #include "ADC.H"
 #include "tur.h"
+#include "temperature.h"
 
 u8 bitmodbus;
 
@@ -31,6 +32,7 @@ void Configure_IWDG(void)
 u32 i=0;
 int main()
 {
+	float TTTT=0;
 	#define VECT_TAB_OFFSET  0x3000
 
 	/* Set the Vector Table base address */
@@ -41,6 +43,7 @@ int main()
 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO|RCC_APB2Periph_GPIOA|RCC_APB2Periph_GPIOB|RCC_APB2Periph_GPIOC, ENABLE);
   
+	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable , ENABLE);
  	delay_init();
 	
 //	Configure_IWDG();  //≈‰÷√ø¥√≈π∑
@@ -49,17 +52,17 @@ int main()
 		
  	eMBInit(MB_RTU, comm_settings.modbusAddr, 0x02, comm_settings.modbusBaud, comm_settings.modbusParity);
   eMBEnable();  
-	LTC2630ISC6_Init();
 	switch_GPIOInit();
-	Adc_Init();
-	TIM2_MeasureInit();
-	TIM3_ModpollInit();
+	temperatureInit();
+	//TIM2_MeasureInit();
+	//TIM3_ModpollInit();
 	
   while(1)
  { 	
-		//eMBPoll(); 
+		eMBPoll(); 
 	  FunctionPoll(); 
-	  //getS365(20);
+	 TTTT=temperatureRead();
+	 TTTT+=1;
 	}
 }
 
